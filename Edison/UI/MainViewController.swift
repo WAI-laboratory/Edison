@@ -33,19 +33,12 @@ class MainViewController: UIViewController {
     }
     
     private func setupLayout() {
-//        view.backgroundColor = UIColor(red: 242/255, green: 237/255, blue: 229/255, alpha: 1)
-        view.backgroundColor = .red
-        
-        view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-//            tableView.widthAnchor.constraint(equalTo: view.widthAnchor),
-//            tableView.heightAnchor.constraint(equalTo: view.heightAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ])
+        view.add(tableView) {
+            $0.backgroundColor = UIColor(red: 241/255, green: 239/255, blue: 229/255, alpha: 1)
+            $0.snp.makeConstraints { (make) in
+                make.edges.equalToSuperview()
+            }
+        }
     }
 
     // MARK: - Action
@@ -55,11 +48,7 @@ class MainViewController: UIViewController {
         let tempVC = NewAddCellViewController()
 //        tempVC.dc = mainDC
         present(NewAddCellViewController(), animated: true, completion: nil)
-//        present(, animated: true)
-//        let lastValue = cellArray.last ?? 0
-//        let newValue = lastValue + 1
-//        cellArray.append(newValue)
-//        tableView.reloadData()
+
     }
 }
 

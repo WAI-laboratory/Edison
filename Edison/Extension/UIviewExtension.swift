@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIView {
+    @discardableResult
     func add<T: UIView>(_ subview: T, and closure: ((T) -> Void)? = nil) -> T {
         addSubview(subview)
         closure?(subview)
