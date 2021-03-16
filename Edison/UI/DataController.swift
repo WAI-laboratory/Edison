@@ -8,7 +8,7 @@
 import Foundation
 
 
-class DataControler {
-    var indexArray = []
-    var str = ""
+class DataController {
+    var cellIndexArray = []
+    var cellStrArray = []
 }

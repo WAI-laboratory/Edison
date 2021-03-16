@@ -63,6 +63,7 @@
 		15C80B3C25FD1C130019CCAF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				15C80B3425FC5D2E0019CCAF /* NewAddCellViewController.swift */,
 				15C80B2D25FC52760019CCAF /* CellDetailViewController.swift */,
 				15C80B3825FC622E0019CCAF /* DataController.swift */,
 				C98CB30625F50BC300821B8F /* MainViewController.swift */,
@@ -94,7 +95,6 @@
 				15C80B3C25FD1C130019CCAF /* UI */,
 				15C80B3025FC529C0019CCAF /* StudyLater.swift */,
 				15C80B2525FC46400019CCAF /* SampleStoryboard.storyboard */,
-				15C80B3425FC5D2E0019CCAF /* NewAddCellViewController.swift */,
 				C98CB30B25F50F5700821B8F /* Extension */,
 				C930588C25F3D79100D8E6A1 /* AppDelegate.swift */,
 				C930588E25F3D79100D8E6A1 /* SceneDelegate.swift */,

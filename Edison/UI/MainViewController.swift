@@ -10,6 +10,9 @@ import SnapKit
 
 class MainViewController: UIViewController {
     private let tableView = UITableView(frame: .zero, style: .insetGrouped) // .zero ( CGrect zero )
+    
+    private var mainDataController = DataController()
+    
     private var cellArray = [1,2,3]
 //    private var mainDC = DataControler()
     
@@ -55,7 +58,7 @@ class MainViewController: UIViewController {
 // MARK: - Table view
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cellArray.count
+        return mainDataController.cellIndexArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -68,5 +71,26 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         let detail = CellDetailViewController()
         detail.value = cellArray[indexPath.row]
         navigationController?.pushViewController(detail, animated: true)
+    }
+}
+
+
+// MARK: - Collection view
+
+extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+}
+
+
+// MARK: - UIExtension
+
+private extension UIView {
+    static func detailCollectionView() -> UICollectionView {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        layout.sectionInset = .init(top: 0, left: 0, bottom: 16, right: 0)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        return collectionView
     }
 }

@@ -24,9 +24,6 @@ class NewAddCellViewController: UIViewController, UITextFieldDelegate {
             $0.snp.makeConstraints { (make) in
                 make.top.equalToSuperview().offset(100)
                 make.bottom.leading.trailing.equalToSuperview()
-                
-                
-            
             }
         }
     }
