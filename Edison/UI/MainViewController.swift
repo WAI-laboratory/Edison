@@ -10,17 +10,20 @@ import SnapKit
 
 class MainViewController: UIViewController {
     private let tableView = UITableView(frame: .zero, style: .insetGrouped) // .zero ( CGrect zero )
+    private let collectionView: UICollectionView = .detailCollectionView()
     
     private var mainDataController = DataController()
     
     private var cellArray = [1,2,3]
-//    private var mainDC = DataControler()
-    
+  
+
     // MARK: - View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        setupLayout()
+//        setupLayout()
+        initView()
+    
 
     }
     
@@ -30,17 +33,32 @@ class MainViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .automatic
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.delegate = self
-        tableView.dataSource = self
+        
     }
     
     private func setupLayout() {
         view.add(tableView) {
+            $0.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+            $0.delegate = self
+            $0.dataSource = self
+//            $0.backgroundColor = UIColor(red: 241/255, green: 239/255, blue: 229/255, alpha: 1)
+            $0.backgroundColor = .red
+            $0.snp.makeConstraints { (make) in
+                make.edges.equalToSuperview()
+            }
+        }
+    }
+    
+    private func initView() {
+        view.add(collectionView) {
+            $0.dataSource = self
+            $0.delegate = self
+            $0.register(CustomCell.self, forCellWithReuseIdentifier: "newCell")
             $0.backgroundColor = UIColor(red: 241/255, green: 239/255, blue: 229/255, alpha: 1)
             $0.snp.makeConstraints { (make) in
                 make.edges.equalToSuperview()
             }
+            
         }
     }
 
@@ -48,9 +66,13 @@ class MainViewController: UIViewController {
     @objc
     func tap(button: Any) {
         guard button is UIBarButtonItem else { return }
+        cellArray.append(2)
+        tableView.reloadData()
+        collectionView.reloadData()
         let tempVC = NewAddCellViewController()
 //        tempVC.dc = mainDC
-        present(NewAddCellViewController(), animated: true, completion: nil)
+//        present(NewAddCellViewController(), animated: true, completion: nil)
+        
 
     }
 }
@@ -58,7 +80,8 @@ class MainViewController: UIViewController {
 // MARK: - Table view
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return mainDataController.cellIndexArray.count
+//        return mainDataController.cellIndexArray.count
+        return cellArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -77,7 +100,34 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: - Collection view
 
-extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return cellArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "newCell", for: indexPath) as! CustomCell
+        cell.titleTextView.text = "\(cellArray[indexPath.row])"
+    
+        cell.backgroundColor = .red
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.frame.width
+        let size = CGSize(width: width, height: 60)
+        return size
+    }
     
 }
 
@@ -92,5 +142,29 @@ private extension UIView {
         layout.sectionInset = .init(top: 0, left: 0, bottom: 16, right: 0)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return collectionView
+    }
+}
+
+
+class CustomCell: UICollectionViewCell {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    let titleTextView = UITextView()
+    
+    func setupView() {
+        backgroundColor = .white
+        
+        add(titleTextView) {
+            $0.snp.makeConstraints { (make) in
+                make.edges.equalToSuperview()
+            }
+        }
     }
 }

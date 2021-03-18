@@ -9,6 +9,6 @@ import Foundation
 
 
 class DataController {
-    var cellIndexArray = []
-    var cellStrArray = []
+    var cellIndexArray = [Int]()
+    var cellStrArray = [String]()
 }
