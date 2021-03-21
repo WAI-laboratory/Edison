@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		15C80B2625FC46400019CCAF /* SampleStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15C80B2525FC46400019CCAF /* SampleStoryboard.storyboard */; };
-		15C80B2E25FC52760019CCAF /* CellDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C80B2D25FC52760019CCAF /* CellDetailViewController.swift */; };
+		15C80B2E25FC52760019CCAF /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C80B2D25FC52760019CCAF /* ItemDetailViewController.swift */; };
 		15C80B3125FC529C0019CCAF /* StudyLater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C80B3025FC529C0019CCAF /* StudyLater.swift */; };
-		15C80B3525FC5D2E0019CCAF /* NewAddCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C80B3425FC5D2E0019CCAF /* NewAddCellViewController.swift */; };
+		15C80B3525FC5D2E0019CCAF /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C80B3425FC5D2E0019CCAF /* AddItemViewController.swift */; };
 		15C80B3925FC622E0019CCAF /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C80B3825FC622E0019CCAF /* DataController.swift */; };
 		C930588D25F3D79100D8E6A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C930588C25F3D79100D8E6A1 /* AppDelegate.swift */; };
 		C930588F25F3D79100D8E6A1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C930588E25F3D79100D8E6A1 /* SceneDelegate.swift */; };
@@ -23,9 +23,9 @@
 
 /* Begin PBXFileReference section */
 		15C80B2525FC46400019CCAF /* SampleStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SampleStoryboard.storyboard; sourceTree = "<group>"; };
-		15C80B2D25FC52760019CCAF /* CellDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDetailViewController.swift; sourceTree = "<group>"; };
+		15C80B2D25FC52760019CCAF /* ItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
 		15C80B3025FC529C0019CCAF /* StudyLater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyLater.swift; sourceTree = "<group>"; };
-		15C80B3425FC5D2E0019CCAF /* NewAddCellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAddCellViewController.swift; sourceTree = "<group>"; };
+		15C80B3425FC5D2E0019CCAF /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		15C80B3825FC622E0019CCAF /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		A47301EBBB5D692B7FB2D395 /* Pods-Edison.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Edison.debug.xcconfig"; path = "Target Support Files/Pods-Edison/Pods-Edison.debug.xcconfig"; sourceTree = "<group>"; };
 		B132AEA23712907F99B50B25 /* Pods-Edison.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Edison.release.xcconfig"; path = "Target Support Files/Pods-Edison/Pods-Edison.release.xcconfig"; sourceTree = "<group>"; };
@@ -60,15 +60,42 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		15C80B3C25FD1C130019CCAF /* UI */ = {
+		150A1F962605866B00A30A37 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				15C80B3425FC5D2E0019CCAF /* NewAddCellViewController.swift */,
-				15C80B2D25FC52760019CCAF /* CellDetailViewController.swift */,
-				15C80B3825FC622E0019CCAF /* DataController.swift */,
-				C98CB30625F50BC300821B8F /* MainViewController.swift */,
+				C930588C25F3D79100D8E6A1 /* AppDelegate.swift */,
+				C930588E25F3D79100D8E6A1 /* SceneDelegate.swift */,
+				C930589725F3D79200D8E6A1 /* LaunchScreen.storyboard */,
+				C930589A25F3D79200D8E6A1 /* Info.plist */,
 			);
-			path = UI;
+			path = Application;
+			sourceTree = "<group>";
+		};
+		150A1F982605869800A30A37 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				C930589525F3D79200D8E6A1 /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		150A1F9A260586AC00A30A37 /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				15C80B2525FC46400019CCAF /* SampleStoryboard.storyboard */,
+				C98CB30625F50BC300821B8F /* MainViewController.swift */,
+				15C80B3425FC5D2E0019CCAF /* AddItemViewController.swift */,
+				15C80B2D25FC52760019CCAF /* ItemDetailViewController.swift */,
+			);
+			path = "View Controller";
+			sourceTree = "<group>";
+		};
+		156AD9BC26058A9300DE7514 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				15C80B3825FC622E0019CCAF /* DataController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		C930588025F3D79100D8E6A1 = {
@@ -92,15 +119,12 @@
 		C930588B25F3D79100D8E6A1 /* Edison */ = {
 			isa = PBXGroup;
 			children = (
-				15C80B3C25FD1C130019CCAF /* UI */,
+				150A1F962605866B00A30A37 /* Application */,
+				156AD9BC26058A9300DE7514 /* Controller */,
+				150A1F9A260586AC00A30A37 /* View Controller */,
 				15C80B3025FC529C0019CCAF /* StudyLater.swift */,
-				15C80B2525FC46400019CCAF /* SampleStoryboard.storyboard */,
 				C98CB30B25F50F5700821B8F /* Extension */,
-				C930588C25F3D79100D8E6A1 /* AppDelegate.swift */,
-				C930588E25F3D79100D8E6A1 /* SceneDelegate.swift */,
-				C930589525F3D79200D8E6A1 /* Assets.xcassets */,
-				C930589725F3D79200D8E6A1 /* LaunchScreen.storyboard */,
-				C930589A25F3D79200D8E6A1 /* Info.plist */,
+				150A1F982605869800A30A37 /* Resource */,
 			);
 			path = Edison;
 			sourceTree = "<group>";
@@ -238,12 +262,12 @@
 			files = (
 				C930588D25F3D79100D8E6A1 /* AppDelegate.swift in Sources */,
 				C930588F25F3D79100D8E6A1 /* SceneDelegate.swift in Sources */,
-				15C80B3525FC5D2E0019CCAF /* NewAddCellViewController.swift in Sources */,
+				15C80B3525FC5D2E0019CCAF /* AddItemViewController.swift in Sources */,
 				15C80B3925FC622E0019CCAF /* DataController.swift in Sources */,
 				15C80B3125FC529C0019CCAF /* StudyLater.swift in Sources */,
 				C98CB30D25F50F7100821B8F /* UIviewExtension.swift in Sources */,
 				C98CB30725F50BC300821B8F /* MainViewController.swift in Sources */,
-				15C80B2E25FC52760019CCAF /* CellDetailViewController.swift in Sources */,
+				15C80B2E25FC52760019CCAF /* ItemDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,7 +409,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VZTRDYYN8R;
-				INFOPLIST_FILE = Edison/Info.plist;
+				INFOPLIST_FILE = Edison/Application/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -406,7 +430,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VZTRDYYN8R;
-				INFOPLIST_FILE = Edison/Info.plist;
+				INFOPLIST_FILE = Edison/Application/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

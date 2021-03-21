@@ -1,5 +1,5 @@
 //
-//  CellDetailViewController.swift
+//  ItemDetailViewController.swift
 //  Edison
 //
 //  Created by 이용준 on 2021/03/13.
@@ -8,16 +8,16 @@
 import UIKit
 import SnapKit
 
-class CellDetailViewController: UIViewController {
+class ItemDetailViewController: UIViewController {
     private var label = UILabel()
     
-    var value: Int?
+    var value: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initView()
-        
     }
+    
         
     private func initView() {
         view.backgroundColor = .yellow
