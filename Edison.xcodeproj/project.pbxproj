@@ -18,6 +18,8 @@
 		C930589925F3D79200D8E6A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C930589725F3D79200D8E6A1 /* LaunchScreen.storyboard */; };
 		C98CB30725F50BC300821B8F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98CB30625F50BC300821B8F /* MainViewController.swift */; };
 		C98CB30D25F50F7100821B8F /* UIviewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98CB30C25F50F7100821B8F /* UIviewExtension.swift */; };
+		C9C6C5152608BBC600A5B4CC /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C6C5142608BBC600A5B4CC /* UICollectionViewExtension.swift */; };
+		C9C6C51A2608C02B00A5B4CC /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C6C5192608C02B00A5B4CC /* ToDo.swift */; };
 		E8B3797C7E99E4AD3A3A25D7 /* Pods_Edison.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB6D2AD086A10C6321DF8E0C /* Pods_Edison.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +39,8 @@
 		C930589A25F3D79200D8E6A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C98CB30625F50BC300821B8F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		C98CB30C25F50F7100821B8F /* UIviewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIviewExtension.swift; sourceTree = "<group>"; };
+		C9C6C5142608BBC600A5B4CC /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
+		C9C6C5192608C02B00A5B4CC /* ToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDo.swift; sourceTree = "<group>"; };
 		FB6D2AD086A10C6321DF8E0C /* Pods_Edison.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Edison.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -119,10 +123,10 @@
 		C930588B25F3D79100D8E6A1 /* Edison */ = {
 			isa = PBXGroup;
 			children = (
+				C9C6C5182608C01900A5B4CC /* Memos */,
 				150A1F962605866B00A30A37 /* Application */,
 				156AD9BC26058A9300DE7514 /* Controller */,
 				150A1F9A260586AC00A30A37 /* View Controller */,
-				15C80B3025FC529C0019CCAF /* StudyLater.swift */,
 				C98CB30B25F50F5700821B8F /* Extension */,
 				150A1F982605869800A30A37 /* Resource */,
 			);
@@ -133,8 +137,18 @@
 			isa = PBXGroup;
 			children = (
 				C98CB30C25F50F7100821B8F /* UIviewExtension.swift */,
+				C9C6C5142608BBC600A5B4CC /* UICollectionViewExtension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		C9C6C5182608C01900A5B4CC /* Memos */ = {
+			isa = PBXGroup;
+			children = (
+				15C80B3025FC529C0019CCAF /* StudyLater.swift */,
+				C9C6C5192608C02B00A5B4CC /* ToDo.swift */,
+			);
+			path = Memos;
 			sourceTree = "<group>";
 		};
 		E0DA2C7B0D7F73C0CF06CC4E /* Pods */ = {
@@ -261,9 +275,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C930588D25F3D79100D8E6A1 /* AppDelegate.swift in Sources */,
+				C9C6C51A2608C02B00A5B4CC /* ToDo.swift in Sources */,
 				C930588F25F3D79100D8E6A1 /* SceneDelegate.swift in Sources */,
 				15C80B3525FC5D2E0019CCAF /* AddItemViewController.swift in Sources */,
 				15C80B3925FC622E0019CCAF /* DataController.swift in Sources */,
+				C9C6C5152608BBC600A5B4CC /* UICollectionViewExtension.swift in Sources */,
 				15C80B3125FC529C0019CCAF /* StudyLater.swift in Sources */,
 				C98CB30D25F50F7100821B8F /* UIviewExtension.swift in Sources */,
 				C98CB30725F50BC300821B8F /* MainViewController.swift in Sources */,
