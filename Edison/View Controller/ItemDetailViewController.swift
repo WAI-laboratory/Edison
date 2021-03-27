@@ -9,40 +9,54 @@ import UIKit
 import SnapKit
 
 class ItemDetailViewController: UIViewController {
-    private var titleLabel = UILabel()
-    private var descriptionLabel = UILabel()
+    var memo: Memo?
     
-    var value: String?
-    var descriptionText: String?
+    // MARK: - View
+    private let scrollView = UIScrollView()
+    private let stackView = UIStackView()
+    private let titleLabel = UILabel()
+    private let descriptionLabel = UILabel()
+    private let imageView = UIImageView()
     
+    // MARK: - View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         initView()
     }
     
-        
     private func initView() {
-        view.backgroundColor = .yellow
-        view.add(titleLabel) {
-            if let resultValue = self.value {
-                $0.text = "\(resultValue)"
-            } else { $0.text = "nil"}
-            $0.textAlignment = .center
-            $0.snp.makeConstraints { (make) in
-                make.trailing.leading.centerX.equalToSuperview()
-                make.top.equalToSuperview().offset(180)
-            }
+        title = memo?.title
+        view.backgroundColor = .clubhouseBackground
+        
+        scrollView.alwaysBounceVertical = true
+        view.addSubview(scrollView)
+        scrollView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
         }
-        view.add(descriptionLabel) {
-            if let resultDescText = self.descriptionText {
-                $0.text = "\(resultDescText)"
-            } else { $0.text = nil}
-            $0.textAlignment = .center
-            $0.snp.makeConstraints { (make) in
-                make.trailing.leading.centerX.equalToSuperview()
-                make.top.equalTo(self.titleLabel.snp.bottom).offset(30)
-            }
+        
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.alignment = .fill
+        stackView.spacing = 8
+        scrollView.addSubview(stackView)
+        stackView.snp.makeConstraints { (make) in
+            make.top.bottom.equalToSuperview()
+            make.left.right.equalToSuperview()
+            make.width.equalTo(scrollView)
+        }
+        
+        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(descriptionLabel)
+        stackView.addArrangedSubview(imageView)
+        
+        titleLabel.text = memo?.title
+        descriptionLabel.text = memo?.description
+        imageView.image = memo?.image
+        
+        imageView.contentMode = .scaleAspectFit
+        imageView.snp.makeConstraints { (make) in
+            make.width.equalToSuperview()
+            make.height.equalTo(320)
         }
     }
-    
 }

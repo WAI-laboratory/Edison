@@ -13,15 +13,19 @@ class Todo {
     //⭕️2-1. Detail view -> show description
     //❌2-2. Detail view -> show image
     
-    // Image from app (Xcode)
-    // Image from URL (Internet)
-    // Image from photo library
-    // Image from file picker
+    // 3
+    //⭕️Image from app (Xcode)
+    //⭕️Image from URL (Internet)
+    //⭕️Image from photo library
+    // ❓Image from file picker
+    // ❓Image from camera
+    // ❓-> UIImage
     
-    //3. Add New -> Select image from photo library ( or camera or file)
-    //4. Image -> Save to file system,
-    //5. Image retrive from file system
-    //6. Reorder, rename, edit, delete
+    //4. Save UIImage to ~/Documents/images/1.jpg (FileManager.default) UIImage (Data) write to path/fileURL
+    //5. Image retrive from file system (Memo.imageURL ->  )
+    
+    //❓6. Detail view Edit -> Change title, description, image
+    //❓7. Reorder, rename, edit, delete
 }
 
 class OnProgress {
@@ -31,5 +35,4 @@ class OnProgress {
 class Done {
     //⭕️ 0. Table view
     //⭕️2-1. Detail view -> show description
-
 }

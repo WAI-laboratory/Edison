@@ -4,7 +4,7 @@
 //
 //  Created by 이용준 on 2021/03/26.
 //
-
+import UIKit
 import Foundation
 
 class Memo: Codable {
@@ -12,12 +12,19 @@ class Memo: Codable {
     var title: String
     var description = ""
     
-//    var imageURL: URL? // FILEURL
-//    var image: UIImage {
-//        // get from file system
+    // TODO: Save to disk
+    var image: UIImage?
+//    var imageURL: URL?
+//    var image: UIImage? {
+//
 //    }
+
+    // MARK: - Key
+    private enum CodingKeys: String, CodingKey {
+        case id, title, description
+    }
     
-    
+    // MARK: - Initializaation
     init(title: String) {
         self.title = title
     }

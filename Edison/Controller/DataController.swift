@@ -7,9 +7,13 @@
 
 import UIKit
 
-class DataController {
-    var data = [Memo]()
-    private let preference = UserDefaults.standard
+final class DataController {
+    private var preference: UserDefaults { UserDefaults.standard }
+    
+    static let dataKey = "cellArray"
+    
+    // MARK: - Data
+    private(set) var data = [Memo]()
     
     // MARK: - Initialization
     init() {
@@ -20,39 +24,29 @@ class DataController {
     
     // MARK: - Action
     func add(item: Memo) {
-        data.append(item)
-        
         print("Add \(item) to data")
-        
+        data.append(item)
         save()
     }
     
-    func reloadData() {
-        print("Reload data")
-    }
-    
-    // MARK: - User defaults
+    // MARK: - Saved data
     private func load() -> [Memo]? {
-        guard let encodedData = preference.data(forKey: "cellArray") else {
-            fatalError()
+        let savedData = preference.data(forKey: Self.dataKey)
+        guard let data = savedData else {
+            print("No saved data")
+            return nil
         }
         
-        let decodedData = try? PropertyListDecoder().decode([Memo].self, from: encodedData)
-        print("Load data \(decodedData)")
+        let decodedData = try? PropertyListDecoder().decode([Memo].self, from: data)
+        print("Load data \(String(describing: decodedData))")
         return decodedData
     }
     
     private func save() {
-//        ["key": 1]
-//        JSONEncoder() -> { "key" : 1 }
-//        PropertyListEncoder() -> <key>1</key>
-        
         guard let encodedData = try? PropertyListEncoder().encode(data) else {
             fatalError("I DIED")
         }
-        
-        preference.set(encodedData, forKey: "cellArray")
-        
         print("Save data")
+        preference.set(encodedData, forKey: Self.dataKey)
     }
 }
