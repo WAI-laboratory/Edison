@@ -11,7 +11,9 @@ import SnapKit
 class MainViewController: UIViewController {
     // MARK: - Data
     private var dataController = DataController()
-    let myUserDefaults = UserDefaults.standard
+    let userDefaults = UserDefaults.standard
+    private var memos = [MemoStruct]()
+
     
     // MARK: - View
 
@@ -20,9 +22,12 @@ class MainViewController: UIViewController {
     // MARK: - View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+//        loadData()
+
         setup()
         setupLayout()
-        dataController.reloadData()
+        updateView()
+
     }
 
     private func setup() {
@@ -78,19 +83,34 @@ class MainViewController: UIViewController {
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return mainDataController.cellIndexArray.count
+    
         return dataController.data.count
+//        return memos.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = "\(dataController.data[indexPath.row].title)"
+        
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cellVC = ItemDetailViewController()
         cellVC.value = dataController.data[indexPath.row].title
+        cellVC.descriptionText = dataController.data[indexPath.row].description
         navigationController?.pushViewController(cellVC, animated: true)
+    }
+}
+
+// MARK: - Load Data
+extension MainViewController {
+     private func loadData() {
+        if let savedData = userDefaults.object(forKey: "memo") as? Data {
+            let decoder = JSONDecoder()
+            if let loadedData = try? decoder.decode([MemoStruct].self, from: savedData) {
+                memos = loadedData
+            }
+        }
     }
 }
