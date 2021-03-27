@@ -8,10 +8,15 @@
 
 class Todo {
     //⭕️ 0. Table view
-    //❌ 1. Codable, JSONEncoder -> memo save to userdefault
+    //❓ 1. Codable, JSONEncoder -> memo save to userdefault
     //2. Detail view -> Show description, image
     //⭕️2-1. Detail view -> show description
     //❌2-2. Detail view -> show image
+    
+    // Image from app (Xcode)
+    // Image from URL (Internet)
+    // Image from photo library
+    // Image from file picker
     
     //3. Add New -> Select image from photo library ( or camera or file)
     //4. Image -> Save to file system,

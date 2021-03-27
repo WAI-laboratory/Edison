@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Memo {
+class Memo: Codable {
     let id = UUID().uuidString
     var title: String
     var description = ""
@@ -17,13 +17,8 @@ class Memo {
 //        // get from file system
 //    }
     
+    
     init(title: String) {
         self.title = title
     }
-}
-
-struct MemoStruct:Codable {
-    let id = UUID().uuidString
-    var title: String?
-    var description: String?
 }

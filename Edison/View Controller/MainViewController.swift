@@ -12,7 +12,6 @@ class MainViewController: UIViewController {
     // MARK: - Data
     private var dataController = DataController()
     let userDefaults = UserDefaults.standard
-    private var memos = [MemoStruct]()
 
     
     // MARK: - View
@@ -91,6 +90,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = "\(dataController.data[indexPath.row].title)"
+        cell.imageView?.image = UIImage(named: "DH1")
         
         return cell
     }
@@ -103,14 +103,4 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-// MARK: - Load Data
-extension MainViewController {
-     private func loadData() {
-        if let savedData = userDefaults.object(forKey: "memo") as? Data {
-            let decoder = JSONDecoder()
-            if let loadedData = try? decoder.decode([MemoStruct].self, from: savedData) {
-                memos = loadedData
-            }
-        }
-    }
-}
+

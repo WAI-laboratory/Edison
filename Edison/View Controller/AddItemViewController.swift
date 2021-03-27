@@ -13,11 +13,11 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
     var tempString = String()
     
     private let newMemo = Memo(title: "")
-    private var tempMemo = MemoStruct()
-    private var memos = [MemoStruct]()
+    
     
     private let titleTextField = UITextField()
     private let descriptionTextField = UITextField()
+    private let imageView = UIImageView()
     
     private let dismissButton = UIButton.dismissButton()
     private let saveButton = UIButton.saveButton()
@@ -29,16 +29,11 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-//        loadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         dataController?.add(item: newMemo)
-//        memos.append(tempMemo)
-//        if let encoded = try? encoder.encode(memos) {
-//            userDefaults.set(encoded, forKey: "memo")
-//        }
         mainVC?.updateView()
 
     }
@@ -60,17 +55,26 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
             $0.backgroundColor = .lightGray
             $0.placeholder = " title "
             $0.snp.makeConstraints { (make) in
-                make.top.equalToSuperview().offset(96)
+                make.top.equalToSuperview().offset(32)
                 make.leading.trailing.equalToSuperview()
-                make.height.equalTo(128)
+                make.height.equalTo(64)
             }
          }
+        view.add(imageView) {
+            $0.image = UIImage(named: "DH1")
+            $0.contentMode = .scaleAspectFit
+            $0.snp.makeConstraints { (make) in
+                make.top.equalTo(self.titleTextField.snp.bottom)
+                make.leading.trailing.equalToSuperview()
+                make.height.equalTo(256)
+            }
+        }
         view.add(descriptionTextField) {
             $0.delegate = self
-            $0.backgroundColor = .purple
+            $0.backgroundColor = .cyan
             $0.snp.makeConstraints { (make) in
                 make.leading.trailing.bottom.equalToSuperview()
-                make.top.equalTo(self.titleTextField.snp.bottom)
+                make.top.equalTo(self.imageView.snp.bottom)
             }
         }
     }
@@ -79,13 +83,6 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
 // MARK: - TextField
 extension AddItemViewController {
     // MARK: - 추후 해볼 것: 텍스트 필드 한글자 추가하는 것?
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        guard let text = titleTextField.text else { return }
-//        tempStrin = dataController?.data.last
-//        text + string
-//        return true
-//    }
-    
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let text = textField.text else { return }
         guard text != "" else { return }
@@ -97,28 +94,6 @@ extension AddItemViewController {
             newMemo.description = text
         default:
             return
-        }
-//        switch textField {
-//        case titleTextField:
-//            tempMemo.title = text
-//        case descriptionTextField:
-//            tempMemo.description = text
-//        default:
-//            return
-//        }
-        
-
-        
-    }
-}
-//MARK: - load data
-extension AddItemViewController {
-    private func loadData() {
-        if let savedData = userDefaults.object(forKey: "memo") as? Data {
-            let decoder = JSONDecoder()
-            if let loadedData = try? decoder.decode([MemoStruct].self, from: savedData) {
-                memos = loadedData
-            }
         }
     }
 }
