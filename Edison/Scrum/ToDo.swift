@@ -7,11 +7,8 @@
 
 
 class Todo {
-    //⭕️ 0. Table view
-    //❓ 1. Codable, JSONEncoder -> memo save to userdefault
-    //2. Detail view -> Show description, image
-    //⭕️2-1. Detail view -> show description
-    //❌2-2. Detail view -> show image
+    
+    
     
     // 3
     //⭕️Image from app (Xcode)
