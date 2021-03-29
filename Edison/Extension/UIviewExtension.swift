@@ -14,4 +14,16 @@ extension UIView {
         closure?(subview)
         return subview
     }
+    
+    static func dismissButton() -> UIButton {
+        let button = UIButton()
+        button.setImage(UIImage(named: "heart"), for: .normal)
+        return button
+    }
+    
+    static func saveButton() -> UIButton {
+        let button = UIButton()
+        button.setImage(UIImage(named: "plus.circle"), for: .normal)
+        return button
+    }
 }

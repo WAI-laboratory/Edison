@@ -7,41 +7,46 @@
 
 import UIKit
 
-class DataController {
-    var data = [Memo]()
+final class DataController {
+    private var preference: UserDefaults { UserDefaults.standard }
     
+    static let dataKey = "cellArray"
     
-    private let preference = UserDefaults.standard
+    // MARK: - Data
+    private(set) var data = [Memo]()
     
+    // MARK: - Initialization
+    init() {
+        if let savedData = load() {
+            data = savedData
+        }
+    }
+    
+    // MARK: - Action
     func add(item: Memo) {
+        print("Add \(item) to data")
         data.append(item)
-//        preference.set(data, forKey: "cellArray")
+        save()
     }
     
-    func reloadData() {
-//        data = preference.array(forKey: "cellArray") as? [Memo] ?? [Memo]()
+    // MARK: - Saved data
+    private func load() -> [Memo]? {
+        let savedData = preference.data(forKey: Self.dataKey)
+        guard let data = savedData else {
+            print("No saved data")
+            return nil
+        }
+        
+        let decodedData = try? PropertyListDecoder().decode([Memo].self, from: data)
+        print("Load data \(String(describing: decodedData))")
+        return decodedData
+    }
+    
+    private func save() {
+        guard let encodedData = try? PropertyListEncoder().encode(data) else {
+            fatalError("I DIED")
+        }
+        print("Save data")
+        preference.set(encodedData, forKey: Self.dataKey)
     }
 }
-
-class Memo {
-    let id = UUID().uuidString
-    var title: String
-    var description = ""
-    
-//    var imageURL: URL? // FILEURL
-//    var image: UIImage {
-//        // get from file system
-//    }
-    
-    init(title: String) {
-        self.title = title
-    }
-}
-
-//0. Table view
-//1. Codable, JSONEncoder -> memo save to userdefault
-//2. Detail view -> Show description, image
-//3. Add New -> Select image from photo library ( or camera or file)
-//4. Image -> Save to file system,
-//5. Image retrive from file system
-//6. Reorder, rename, edit, delete

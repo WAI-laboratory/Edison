@@ -105,6 +105,11 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="38z-WJ-zSy">
+                                <rect key="frame" x="168" y="556" width="128" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="plus"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gkr-PV-0WK"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -116,6 +121,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="plus" width="128" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
