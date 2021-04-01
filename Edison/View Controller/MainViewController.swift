@@ -11,6 +11,7 @@ import SnapKit
 class MainViewController: UIViewController {
     // MARK: - Data
     private var dataController = DataController()
+    private let fileManager = FileManager()
     
     // MARK: - View
     private let tableView = UITableView(frame: .zero, style: .insetGrouped)
@@ -59,6 +60,8 @@ class MainViewController: UIViewController {
     
     private func presentAddNew() {
         let addVC = AddItemViewController()
+        addVC.index = dataController.data.count
+        
         addVC.mainVC = self
         addVC.dataController = dataController
         present(addVC, animated: true, completion: nil)
@@ -74,9 +77,12 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let memo = dataController.data[indexPath.row]
+        var images = [UIImage]()
+        images[indexPath.row] = loadImageFromDocuments(indexPath.row)
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = "\(memo.title)"
-        cell.imageView?.image = memo.image
+//        cell.imageView?.image = memo.image
+        cell.imageView?.image = images[indexPath.row]
         return cell
     }
 
@@ -85,7 +91,26 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         let memo = dataController.data[indexPath.row]
         let detailVC = ItemDetailViewController()
         detailVC.memo = memo
+        
         navigationController?.pushViewController(detailVC, animated: true)
+    }
+}
+
+// MARK: - Load image from file directory
+extension MainViewController {
+    func loadImageFromDocuments(_ index: Int) -> UIImage {
+        do {
+            let tempInt = index + 1
+            let directoryPath = NSHomeDirectory().appending("/Documents/image/\(tempInt).jpg")
+            let data = try Data(contentsOf: NSURL.fileURL(withPath: directoryPath))
+            return UIImage(data: data) ?? UIImage()
+            
+            
+            
+        } catch {
+            print(error)
+        }
+        return UIImage()
     }
 }
 

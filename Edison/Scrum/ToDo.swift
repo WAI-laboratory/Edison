@@ -11,8 +11,7 @@ class Todo {
     
     
     // 3
-    //⭕️Image from app (Xcode)
-    //⭕️Image from URL (Internet)
+    
     //⭕️Image from photo library
     // ❓Image from file picker
     // ❓Image from camera

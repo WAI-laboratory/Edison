@@ -18,6 +18,7 @@ class ItemDetailViewController: UIViewController {
     private let descriptionLabel = UILabel()
     private let imageView = UIImageView()
     
+    
     // MARK: - View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()

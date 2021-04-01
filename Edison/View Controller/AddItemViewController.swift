@@ -11,6 +11,7 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
     weak var mainVC : MainViewController?
     var dataController: DataController?
     var tempString = String()
+    var index = Int()
     
     private let newMemo = Memo(title: "")
     
@@ -137,7 +138,29 @@ extension AddItemViewController {
             self.image = image
             self.imageView.image = self.image
             newMemo.image = self.image
+            saveImageToDocumentDirectory(image, index)
         }
         picker.dismiss(animated: true, completion: nil)
+    }
+    
+    private func saveImageToDocumentDirectory(_ image: UIImage, _ position: Int) {
+        let directoryPath = NSHomeDirectory().appending("/Documents/image/")
+        if !FileManager.default.fileExists(atPath: directoryPath) {
+            do {
+                try FileManager.default.createDirectory(at: NSURL.fileURL(withPath: directoryPath), withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                print(error)
+            }
+        }
+        
+        let filename = "\(position)".appending(".jpg")
+        let filepath = directoryPath.appending(filename)
+        let url = NSURL.fileURL(withPath: filepath)
+        
+        do {
+            try image.jpegData(compressionQuality: 1)?.write(to: url, options: .atomic)
+        } catch {
+            print(error)
+        }
     }
 }
