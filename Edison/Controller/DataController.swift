@@ -51,26 +51,64 @@ final class DataController {
     }
     
     // MARK: - Save Image
-    private func saveImageToDocumentDirectory(_ image: UIImage, _ position: Int) -> String {
-        let directoryPath = NSHomeDirectory().appending("/Documents/image/")
-        if !FileManager.default.fileExists(atPath: directoryPath) {
-            do {
-                try FileManager.default.createDirectory(at: NSURL.fileURL(withPath: directoryPath), withIntermediateDirectories: true, attributes: nil)
-            } catch {
-                print(error)
-            }
+    func assign(image: UIImage, to memo: Memo) {
+        let imageID = newImageID()
+        save(image: image, for: imageID)
+        memo.imageID = imageID
+        save()
+    }
+    
+    @discardableResult
+    private func save(image: UIImage, for imageID: String) -> URL? {
+        createImageDirectoryIfNeeded()
+        
+        guard let imageURL = newImageURL(for: imageID) else {
+            return nil
         }
-        
-        let filename = "\(position)".appending(".jpg")
-        let filepath = directoryPath.appending(filename)
-        let url = NSURL.fileURL(withPath: filepath)
-        
         do {
-            try image.jpegData(compressionQuality: 1)?.write(to: url, options: .atomic)
-            return String("/Documents/image/\(filename)")
+            try image.jpegData(compressionQuality: 1)?.write(to: imageURL, options: .atomic)
+            return imageURL
         } catch {
-            print(error)
-            return filepath
+            print(error.localizedDescription)
+            return nil
+        }
+    }
+    
+    func loadImage(for imageID: String) -> UIImage? {
+        guard let imageURL = imageDirectory()?.appendingPathComponent("\(imageID).jpg") else {
+            return nil
+        }
+        guard let data = FileManager.default.contents(atPath: imageURL.path) else {
+            return nil
+        }
+        return UIImage(data: data)
+    }
+    
+    // MARK: - Direvtory
+    private func imageDirectory() -> URL? {
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        let imageDirURL = documentsURL?.appendingPathComponent("images", isDirectory: true)
+        return imageDirURL
+    }
+    
+    private func newImageID() -> String {
+        return UUID().uuidString
+    }
+    
+    private func newImageURL(for imageID: String) -> URL? {
+        let imageName = "\(imageID).jpg"
+        return imageDirectory()?.appendingPathComponent(imageName, isDirectory: false)
+    }
+    
+    private func createImageDirectoryIfNeeded() {
+        guard let imageDirURL = imageDirectory() else { return }
+        let manager = FileManager.default
+        if !manager.fileExists(atPath: imageDirURL.path) {
+            do {
+                try manager.createDirectory(at: imageDirURL, withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
 }

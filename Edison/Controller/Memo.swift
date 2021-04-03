@@ -12,20 +12,21 @@ class Memo: Codable {
     var title: String
     var description = ""
     
-    // TODO: Save to disk
-    var image: UIImage?
-//    var imageURL: URL?
-//    var image: UIImage? {
-//
-//    }
+    var imageID = ""
 
     // MARK: - Key
     private enum CodingKeys: String, CodingKey {
-        case id, title, description
+        case id, title, description, imageID
     }
     
     // MARK: - Initializaation
     init(title: String) {
         self.title = title
+    }
+}
+
+extension Memo: CustomDebugStringConvertible {
+    var debugDescription: String {
+        return "ID \(id) | \(title) \(description) | \(imageID)"
     }
 }

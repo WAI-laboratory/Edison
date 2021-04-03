@@ -52,7 +52,7 @@ class ItemDetailViewController: UIViewController {
         
         titleLabel.text = memo?.title
         descriptionLabel.text = memo?.description
-        imageView.image = memo?.image
+//        imageView.image = memo?.image
         
         imageView.contentMode = .scaleAspectFit
         imageView.snp.makeConstraints { (make) in
