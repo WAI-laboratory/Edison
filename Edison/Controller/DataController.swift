@@ -43,6 +43,7 @@ final class DataController {
     }
     
     private func save() {
+    
         guard let encodedData = try? PropertyListEncoder().encode(data) else {
             fatalError("I DIED")
         }
@@ -84,7 +85,7 @@ final class DataController {
         return UIImage(data: data)
     }
     
-    // MARK: - Direvtory
+    // MARK: - Directory
     private func imageDirectory() -> URL? {
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
         let imageDirURL = documentsURL?.appendingPathComponent("images", isDirectory: true)
