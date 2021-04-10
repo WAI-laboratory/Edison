@@ -12,7 +12,12 @@ class Memo: Codable {
     var title: String
     var description = ""
     
-    var imageID = ""
+    private(set) var imageID = ""
+    
+    var image: UIImage? {
+        get { DataController.shared.loadImage(for: imageID) }
+        set { DataController.shared.assign(image: newValue, to: self) }
+    }
 
     // MARK: - Key
     private enum CodingKeys: String, CodingKey {
@@ -22,6 +27,18 @@ class Memo: Codable {
     // MARK: - Initializaation
     init(title: String) {
         self.title = title
+    }
+    
+    // MARK: - Action
+    func setImageID(_ id: String) {
+        imageID = id
+    }
+}
+
+extension Memo: Equatable {
+    static func == (lhs: Memo, rhs: Memo) -> Bool {
+        // left hand side / right hand side
+        return lhs.id == rhs.id
     }
 }
 

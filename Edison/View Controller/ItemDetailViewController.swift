@@ -11,13 +11,14 @@ import SnapKit
 class ItemDetailViewController: UIViewController {
     var memo: Memo?
     
+    private let dataController = DataController.shared
+    
     // MARK: - View
     private let scrollView = UIScrollView()
     private let stackView = UIStackView()
     private let titleLabel = UILabel()
     private let descriptionLabel = UILabel()
     private let imageView = UIImageView()
-    
     
     // MARK: - View life cycle
     override func viewDidLoad() {
@@ -39,6 +40,7 @@ class ItemDetailViewController: UIViewController {
         stackView.distribution = .fill
         stackView.alignment = .fill
         stackView.spacing = 8
+        
         scrollView.addSubview(stackView)
         stackView.snp.makeConstraints { (make) in
             make.top.bottom.equalToSuperview()
@@ -52,12 +54,22 @@ class ItemDetailViewController: UIViewController {
         
         titleLabel.text = memo?.title
         descriptionLabel.text = memo?.description
-//        imageView.image = memo?.image
+        if memo?.imageID != "" {
+            imageView.image = dataController.loadImage(for: memo!.imageID)
+        }
         
         imageView.contentMode = .scaleAspectFit
         imageView.snp.makeConstraints { (make) in
             make.width.equalToSuperview()
             make.height.equalTo(320)
         }
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editDetails(edit:)))]
+    }
+    
+    @objc
+    func editDetails(edit button: UIBarButtonItem) {
+        guard let memo = memo else { return }
+        let navigation = EditItmeViewController.instantiate(with: memo)
+        present(navigation, animated: true)
     }
 }

@@ -22,6 +22,8 @@
 		C98CB30D25F50F7100821B8F /* UIviewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98CB30C25F50F7100821B8F /* UIviewExtension.swift */; };
 		C9C6C5152608BBC600A5B4CC /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C6C5142608BBC600A5B4CC /* UICollectionViewExtension.swift */; };
 		C9C6C51A2608C02B00A5B4CC /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C6C5192608C02B00A5B4CC /* ToDo.swift */; };
+		C9C6C5DC262131EC00A5B4CC /* EditItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C6C5DB262131EC00A5B4CC /* EditItemViewController.swift */; };
+		C9C6C5E22621430400A5B4CC /* MemoBaseEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C6C5E12621430400A5B4CC /* MemoBaseEditViewController.swift */; };
 		E8B3797C7E99E4AD3A3A25D7 /* Pods_Edison.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB6D2AD086A10C6321DF8E0C /* Pods_Edison.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +47,8 @@
 		C98CB30C25F50F7100821B8F /* UIviewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIviewExtension.swift; sourceTree = "<group>"; };
 		C9C6C5142608BBC600A5B4CC /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 		C9C6C5192608C02B00A5B4CC /* ToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDo.swift; sourceTree = "<group>"; };
+		C9C6C5DB262131EC00A5B4CC /* EditItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemViewController.swift; sourceTree = "<group>"; };
+		C9C6C5E12621430400A5B4CC /* MemoBaseEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoBaseEditViewController.swift; sourceTree = "<group>"; };
 		FB6D2AD086A10C6321DF8E0C /* Pods_Edison.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Edison.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -90,9 +94,11 @@
 		150A1F9A260586AC00A30A37 /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				C9C6C5E12621430400A5B4CC /* MemoBaseEditViewController.swift */,
+				C9C6C5DF2621377200A5B4CC /* AddVC */,
+				C9C6C5DE2621375A00A5B4CC /* EditVC */,
 				15C80B2525FC46400019CCAF /* SampleStoryboard.storyboard */,
 				C98CB30625F50BC300821B8F /* MainViewController.swift */,
-				15C80B3425FC5D2E0019CCAF /* AddItemViewController.swift */,
 				15C80B2D25FC52760019CCAF /* ItemDetailViewController.swift */,
 				15C7065A260E34C1000939E4 /* BaseViewController.swift */,
 			);
@@ -155,6 +161,22 @@
 				C9C6C5142608BBC600A5B4CC /* UICollectionViewExtension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		C9C6C5DE2621375A00A5B4CC /* EditVC */ = {
+			isa = PBXGroup;
+			children = (
+				C9C6C5DB262131EC00A5B4CC /* EditItemViewController.swift */,
+			);
+			path = EditVC;
+			sourceTree = "<group>";
+		};
+		C9C6C5DF2621377200A5B4CC /* AddVC */ = {
+			isa = PBXGroup;
+			children = (
+				15C80B3425FC5D2E0019CCAF /* AddItemViewController.swift */,
+			);
+			path = AddVC;
 			sourceTree = "<group>";
 		};
 		E0DA2C7B0D7F73C0CF06CC4E /* Pods */ = {
@@ -281,6 +303,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C930588D25F3D79100D8E6A1 /* AppDelegate.swift in Sources */,
+				C9C6C5DC262131EC00A5B4CC /* EditItemViewController.swift in Sources */,
 				C9C6C51A2608C02B00A5B4CC /* ToDo.swift in Sources */,
 				C930588F25F3D79100D8E6A1 /* SceneDelegate.swift in Sources */,
 				15C80B3525FC5D2E0019CCAF /* AddItemViewController.swift in Sources */,
@@ -289,6 +312,7 @@
 				C9C6C5152608BBC600A5B4CC /* UICollectionViewExtension.swift in Sources */,
 				15C7064A260E233B000939E4 /* Memo.swift in Sources */,
 				15C80B3125FC529C0019CCAF /* StudyLater.swift in Sources */,
+				C9C6C5E22621430400A5B4CC /* MemoBaseEditViewController.swift in Sources */,
 				C98CB30D25F50F7100821B8F /* UIviewExtension.swift in Sources */,
 				C98CB30725F50BC300821B8F /* MainViewController.swift in Sources */,
 				15C80B2E25FC52760019CCAF /* ItemDetailViewController.swift in Sources */,

@@ -10,7 +10,7 @@ import SnapKit
 
 class MainViewController: UIViewController {
     // MARK: - Data
-    private var dataController = DataController()
+    private let dataController = DataController.shared
     private let fileManager = FileManager()
     
     // MARK: - View
@@ -46,7 +46,6 @@ class MainViewController: UIViewController {
         }
     }
     
-    
     // MARK: - User interaction
     @objc
     func tap(add button: UIBarButtonItem) {
@@ -59,12 +58,8 @@ class MainViewController: UIViewController {
     }
     
     private func presentAddNew() {
-        let addVC = AddItemViewController()
-        addVC.index = dataController.data.count
-        
-        addVC.mainVC = self
-        addVC.dataController = dataController
-        present(addVC, animated: true, completion: nil)
+        let vc = AddItemViewController.instantiate()
+        present(vc, animated: true)
     }
 }
 
@@ -72,11 +67,11 @@ class MainViewController: UIViewController {
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     // Data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataController.data.count
+        return dataController.memos.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let memo = dataController.data[indexPath.row]
+        let memo = dataController.memos[indexPath.row]
          
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = "\(memo.title)"
@@ -90,9 +85,10 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 
     // Delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let memo = dataController.data[indexPath.row]
+        let memo = dataController.memos[indexPath.row]
         let detailVC = ItemDetailViewController()
         detailVC.memo = memo
+        
         
         navigationController?.pushViewController(detailVC, animated: true)
     }

@@ -8,26 +8,29 @@
 import UIKit
 
 final class DataController {
+    static let shared = DataController()
+    
     private var preference: UserDefaults { UserDefaults.standard }
     
     static let dataKey = "cellArray"
     
     // MARK: - Data
-    private(set) var data = [Memo]()
+    private(set) var memos = [Memo]()
     
     // MARK: - Initialization
-    init() {
+    private init() {
         if let savedData = load() {
-            data = savedData
+            memos = savedData
         }
     }
     
     // MARK: - Action
     func add(item: Memo) {
         print("Add \(item) to data")
-        data.append(item)
+        memos.append(item)
         save()
     }
+    
     
     // MARK: - Saved data
     private func load() -> [Memo]? {
@@ -43,8 +46,7 @@ final class DataController {
     }
     
     private func save() {
-    
-        guard let encodedData = try? PropertyListEncoder().encode(data) else {
+        guard let encodedData = try? PropertyListEncoder().encode(memos) else {
             fatalError("I DIED")
         }
         print("Save data")
@@ -52,10 +54,15 @@ final class DataController {
     }
     
     // MARK: - Save Image
-    func assign(image: UIImage, to memo: Memo) {
-        let imageID = newImageID()
-        save(image: image, for: imageID)
-        memo.imageID = imageID
+    func assign(image: UIImage?, to memo: Memo) {
+        if let image = image {
+            let imageID = newImageID()
+            save(image: image, for: imageID)
+            memo.setImageID(imageID)
+        } else {
+            memo.setImageID("")
+            // TODO: Delete image from file
+        }
         save()
     }
     
