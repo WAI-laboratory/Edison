@@ -7,9 +7,12 @@
 
 import UIKit
 import SnapKit
+//import CoreData
 
 class EditItmeViewController: MemoBaseEditViewController {
     weak var detailVC : ItemDetailViewController?
+    
+
     
     // MARK: - Initialization
     static func instantiate(with memo: Memo) -> UINavigationController {

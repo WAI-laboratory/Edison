@@ -101,8 +101,12 @@ class MemoBaseEditViewController: UIViewController {
     
     private func saveMemoToDataController() {
         let dataController = DataController.shared
-        if dataController.memos.contains(memo) == false {
-            dataController.add(item: memo)
+        if self is AddItemViewController {
+            if dataController.memos.contains(memo) == false {
+                dataController.add(item: memo)
+            }
+        } else if self is EditItmeViewController {
+            dataController.itemEdited()
         }
     }
     

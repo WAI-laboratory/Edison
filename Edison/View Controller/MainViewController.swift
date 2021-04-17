@@ -92,7 +92,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
          
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = "\(memo.title)"
-        print("IMAGE \(memo.imageID)")
+        // print("IMAGE \(memo.imageID)")
         if memo.imageID != "" {
             cell.imageView?.image = dataController.loadImage(for: memo.imageID)
         }
@@ -105,8 +105,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         let memo = dataController.memos[indexPath.row]
         let detailVC = ItemDetailViewController()
         detailVC.memo = memo
-        
-        
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }

@@ -25,11 +25,13 @@ class ItemDetailViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         updateView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         setupNotification()
     }
     
     private func setupView() {
-        title = memo?.title
         view.backgroundColor = .clubhouseBackground
         
         scrollView.alwaysBounceVertical = true
@@ -72,6 +74,7 @@ class ItemDetailViewController: UIViewController {
     
     // MARK: - Action
     private func updateView() {
+        title = memo?.title
         titleLabel.text = memo?.title
         descriptionLabel.text = memo?.description
         if memo?.imageID != "" {

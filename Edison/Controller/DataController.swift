@@ -18,6 +18,8 @@ final class DataController {
     
     static let dataKey = "cellArray"
     
+    private var imageCache = [String: UIImage]()
+    
     // MARK: - Data
     private(set) var memos = [Memo]()
     
@@ -30,22 +32,25 @@ final class DataController {
     
     // MARK: - Action
     func add(item: Memo) {
-        print("Add \(item) to data")
+        // print("Add \(item) to data")
         memos.append(item)
         save()
     }
     
+    func itemEdited() {
+        save()
+    }
     
     // MARK: - Saved data
     private func load() -> [Memo]? {
         let savedData = preference.data(forKey: Self.dataKey)
         guard let data = savedData else {
-            print("No saved data")
+            // print("No saved data")
             return nil
         }
         
         let decodedData = try? PropertyListDecoder().decode([Memo].self, from: data)
-        print("Load data \(String(describing: decodedData))")
+        // print("Load data \(String(describing: decodedData))")
         return decodedData
     }
     
@@ -53,7 +58,7 @@ final class DataController {
         guard let encodedData = try? PropertyListEncoder().encode(memos) else {
             fatalError("I DIED")
         }
-        print("Save data")
+        // print("Save data")
         
         
         NotificationCenter.default
@@ -79,6 +84,8 @@ final class DataController {
     
     @discardableResult
     private func save(image: UIImage, for imageID: String) -> URL? {
+        cacheImage(image, for: imageID)
+        
         createImageDirectoryIfNeeded()
         
         guard let imageURL = newImageURL(for: imageID) else {
@@ -88,19 +95,35 @@ final class DataController {
             try image.jpegData(compressionQuality: 1)?.write(to: imageURL, options: .atomic)
             return imageURL
         } catch {
-            print(error.localizedDescription)
+            // print(error.localizedDescription)
             return nil
         }
     }
     
     func loadImage(for imageID: String) -> UIImage? {
+        if let image = getCachedImage(for: imageID) {
+            return image
+        }
+        
         guard let imageURL = imageDirectory()?.appendingPathComponent("\(imageID).jpg") else {
             return nil
         }
         guard let data = FileManager.default.contents(atPath: imageURL.path) else {
             return nil
         }
-        return UIImage(data: data)
+        
+        let image = UIImage(data: data)
+        cacheImage(image, for: imageID)
+        
+        return image
+    }
+    
+    private func cacheImage(_ image: UIImage?, for imageID: String) {
+        imageCache[imageID] = image
+    }
+    
+    private func getCachedImage(for imageID: String) -> UIImage? {
+        return imageCache[imageID]
     }
     
     // MARK: - Directory
@@ -126,7 +149,7 @@ final class DataController {
             do {
                 try manager.createDirectory(at: imageDirURL, withIntermediateDirectories: true, attributes: nil)
             } catch {
-                print(error.localizedDescription)
+                // print(error.localizedDescription)
             }
         }
     }
