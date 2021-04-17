@@ -21,8 +21,13 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         setup()
         setupLayout()
+        setupNotification()
         updateView()
-
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
     }
 
     private func setup() {
@@ -31,7 +36,6 @@ class MainViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .automatic
         navigationController?.navigationBar.prefersLargeTitles = true
     }
-    
 
     private func setupLayout() {
         view.add(tableView) {
@@ -46,6 +50,14 @@ class MainViewController: UIViewController {
         }
     }
     
+    private func setupNotification() {
+        NotificationCenter.default
+            .addObserver(self,
+                         selector: #selector(handle(reload:)),
+                         name: .reloadNotificaiton,
+                         object: dataController)
+    }
+    
     // MARK: - User interaction
     @objc
     func tap(add button: UIBarButtonItem) {
@@ -53,8 +65,13 @@ class MainViewController: UIViewController {
     }
 
     // MARK: - Action
-    func updateView() {
+    private func updateView() {
         tableView.reloadData()
+    }
+    
+    @objc
+    private func handle(reload notification: Notification) {
+        updateView()
     }
     
     private func presentAddNew() {

@@ -29,8 +29,4 @@ class OnProgress {
 }
 
 class Done {
-    //⭕️ 0. Table view
-    //⭕️2-1. Detail view -> show description
-    //4. Save UIImage to ~/Documents/images/1.jpg (FileManager.default) UIImage (Data) write to path/fileURL
-    //5. Image retrive from file system (Memo.imageURL ->  )
 }

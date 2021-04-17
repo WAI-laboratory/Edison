@@ -32,7 +32,6 @@ class BaseViewController: UIViewController {
             }
             $0.addTarget(self, action: #selector(self.dismiss(animated:completion:)), for: .touchUpInside)
         }
-
     }
     
     @objc func dismissNow() {

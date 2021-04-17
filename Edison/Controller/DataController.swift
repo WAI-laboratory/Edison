@@ -7,6 +7,10 @@
 
 import UIKit
 
+extension Notification.Name {
+    static let reloadNotificaiton = Notification.Name(rawValue: "reloadNotificaiton")
+}
+
 final class DataController {
     static let shared = DataController()
     
@@ -50,6 +54,13 @@ final class DataController {
             fatalError("I DIED")
         }
         print("Save data")
+        
+        
+        NotificationCenter.default
+            .post(name: .reloadNotificaiton,
+                  object: self,
+                  userInfo: nil)
+
         preference.set(encodedData, forKey: Self.dataKey)
     }
     

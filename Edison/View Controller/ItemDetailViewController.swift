@@ -23,10 +23,12 @@ class ItemDetailViewController: UIViewController {
     // MARK: - View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        initView()
+        setupView()
+        updateView()
+        setupNotification()
     }
     
-    private func initView() {
+    private func setupView() {
         title = memo?.title
         view.backgroundColor = .clubhouseBackground
         
@@ -52,18 +54,34 @@ class ItemDetailViewController: UIViewController {
         stackView.addArrangedSubview(descriptionLabel)
         stackView.addArrangedSubview(imageView)
         
-        titleLabel.text = memo?.title
-        descriptionLabel.text = memo?.description
-        if memo?.imageID != "" {
-            imageView.image = dataController.loadImage(for: memo!.imageID)
-        }
-        
         imageView.contentMode = .scaleAspectFit
         imageView.snp.makeConstraints { (make) in
             make.width.equalToSuperview()
             make.height.equalTo(320)
         }
         navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editDetails(edit:)))]
+    }
+
+    private func setupNotification() {
+        NotificationCenter.default
+            .addObserver(self,
+                         selector: #selector(handle(reload:)),
+                         name: .reloadNotificaiton,
+                         object: dataController)
+    }
+    
+    // MARK: - Action
+    private func updateView() {
+        titleLabel.text = memo?.title
+        descriptionLabel.text = memo?.description
+        if memo?.imageID != "" {
+            imageView.image = dataController.loadImage(for: memo!.imageID)
+        }
+    }
+    
+    @objc
+    private func handle(reload notification: Notification) {
+        updateView()
     }
     
     @objc
