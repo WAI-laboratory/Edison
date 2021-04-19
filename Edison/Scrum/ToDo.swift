@@ -26,7 +26,6 @@ class Todo {
 }
 
 class OnProgress {
-    
 }
 
 class Done {

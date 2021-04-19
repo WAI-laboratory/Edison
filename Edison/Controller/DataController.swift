@@ -7,10 +7,6 @@
 
 import UIKit
 
-extension Notification.Name {
-    static let reloadNotificaiton = Notification.Name(rawValue: "reloadNotificaiton")
-}
-
 final class DataController {
     static let shared = DataController()
     

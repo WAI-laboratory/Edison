@@ -109,7 +109,3 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-
-extension UIColor {
-    static let clubhouseBackground = UIColor(red: 241/255, green: 239/255, blue: 229/255, alpha: 1)
-}
