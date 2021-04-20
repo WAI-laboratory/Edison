@@ -37,6 +37,11 @@ final class DataController {
         save()
     }
     
+    func remove(index: Int) {
+        memos.remove(at: index)
+        save()
+    }
+    
     // MARK: - Saved data
     private func load() -> [Memo]? {
         let savedData = preference.data(forKey: Self.dataKey)
@@ -120,6 +125,11 @@ final class DataController {
     
     private func getCachedImage(for imageID: String) -> UIImage? {
         return imageCache[imageID]
+    }
+    
+    // MARK: - Delete Data
+    private func delete() {
+        
     }
     
     // MARK: - Directory

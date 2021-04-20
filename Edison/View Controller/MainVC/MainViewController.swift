@@ -32,7 +32,12 @@ class MainViewController: UIViewController {
 
     private func setup() {
         navigationItem.title = "Title"
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(tap(add:)))]
+        navigationItem.rightBarButtonItems =
+            [UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(tap(add:))),
+             UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(tap(edit:)))]
+        navigationItem.leftBarButtonItems =
+            [UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(tap(delete:))),
+             UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(tap(sort:)))]
         navigationItem.largeTitleDisplayMode = .automatic
         navigationController?.navigationBar.prefersLargeTitles = true
     }
@@ -62,6 +67,21 @@ class MainViewController: UIViewController {
     @objc
     func tap(add button: UIBarButtonItem) {
         presentAddNew()
+    }
+    
+    @objc
+    func tap(edit button: UIBarButtonItem) {
+        
+    }
+    
+    @objc
+    func tap(delete button: UIBarButtonItem) {
+        
+    }
+    
+    @objc
+    func tap(sort button: UIBarButtonItem) {
+        
     }
 
     // MARK: - Action
@@ -106,6 +126,17 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         let detailVC = ItemDetailViewController()
         detailVC.memo = memo
         navigationController?.pushViewController(detailVC, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+//            dataController.memos.remove(at: indexPath.row)
+
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+        } else if editingStyle == .insert {
+            
+        }
     }
 }
 
