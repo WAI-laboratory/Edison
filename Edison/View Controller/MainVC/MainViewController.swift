@@ -130,13 +130,17 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            tableView.beginUpdates()
 //            dataController.memos.remove(at: indexPath.row)
+            dataController.remove(index: indexPath.row)
 
             tableView.deleteRows(at: [indexPath], with: .fade)
-            
+            tableView.endUpdates()
         } else if editingStyle == .insert {
             
         }
     }
+
+                
 }
 
