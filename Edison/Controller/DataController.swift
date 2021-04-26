@@ -33,12 +33,27 @@ final class DataController {
         save()
     }
     
+    func insert(item: Memo, at: Int) {
+        memos.insert(item, at: at)
+        save()
+    }
+    
     func itemEdited() {
         save()
     }
     
     func remove(index: Int) {
         memos.remove(at: index)
+        save()
+    }
+    
+    func sortByAscend() {
+        memos.sort(by: { $0.title < $1.title })
+        save()
+    }
+    
+    func sortByDescend() {
+        memos.sort(by: {$0.title > $1.title})
         save()
     }
     

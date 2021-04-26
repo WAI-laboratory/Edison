@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MemoBaseEditViewController: UIViewController {
+class MemoBaseEditViewController: UIViewController, UIDocumentPickerDelegate {
     var memo = Memo(title: "")
 
     // MARK: - View
@@ -59,7 +59,9 @@ class MemoBaseEditViewController: UIViewController {
         scrollView.alwaysBounceVertical = true
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.top.bottom.equalToSuperview()
+            make.leading.equalTo(self.view.safeAreaLayoutGuide.snp.leading)
+            make.trailing.equalTo(self.view.safeAreaLayoutGuide.snp.trailing)
         }
 
         stackView.axis = .vertical
@@ -120,9 +122,15 @@ class MemoBaseEditViewController: UIViewController {
         { [weak self] (action) in
             self?.presentCamera()
         }
+        let file = UIAlertAction(title: "File", style: .default)
+        { [weak self] (action) in
+            self?.presentFile()
+        }
+        
         let cancel = UIAlertAction(title: "Cancel", style: .cancel)
         alert.addAction(photoLibrary)
         alert.addAction(camera)
+        alert.addAction(file)
         alert.addAction(cancel)
         present(alert, animated: true)
     }
@@ -136,12 +144,22 @@ class MemoBaseEditViewController: UIViewController {
     }
 
     private func presentCamera() {
-//        if (UIImagePickerController.isSourceTypeAvailable(.camera)) {
-//            self.picker.sourceType = .camera
-//            self.present(self.picker, animated: true, completion: nil)
-//        } else {
-//            fatalError()
-//        }
+        if (UIImagePickerController.isSourceTypeAvailable(.camera)) {
+            let picker = UIImagePickerController()
+            picker.sourceType = .camera
+            picker.delegate = self
+            present(picker, animated: true, completion: nil)
+        } else {
+            print("something wrong")
+        }
+    }
+    
+    private func presentFile() {
+        let documentPicker = UIDocumentPickerViewController(documentTypes: [".jpg", ".png"], in: .open)
+        
+        
+        documentPicker.delegate = self
+        present(documentPicker, animated: true)
     }
 }
 

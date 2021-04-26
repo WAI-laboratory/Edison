@@ -15,6 +15,14 @@ class MainViewController: UIViewController {
     
     // MARK: - View
     private let tableView = UITableView(frame: .zero, style: .insetGrouped)
+    private lazy var addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(tap(add:)))
+    
+    private lazy var sortButton = UIBarButtonItem(title: "Sort", menu: sortMenu)
+    private lazy var sortMenu = UIMenu(children: [
+        UIAction(title: "Ascending", handler: handle(ascending:)),
+        UIAction(title: "Descending", handler: handle(descending: )),
+        UIAction(title: "Manual", handler: handle(manualSort:))
+    ])
 
     // MARK: - View life cycle
     override func viewDidLoad() {
@@ -32,14 +40,11 @@ class MainViewController: UIViewController {
 
     private func setup() {
         navigationItem.title = "Title"
-        navigationItem.rightBarButtonItems =
-            [UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(tap(add:))),
-             UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(tap(edit:)))]
-        navigationItem.leftBarButtonItems =
-            [UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(tap(delete:))),
-             UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(tap(sort:)))]
+        
         navigationItem.largeTitleDisplayMode = .automatic
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.leftBarButtonItems = [editButtonItem]
+        navigationItem.rightBarButtonItems = [addButton, sortButton]
     }
 
     private func setupLayout() {
@@ -64,25 +69,40 @@ class MainViewController: UIViewController {
     }
     
     // MARK: - User interaction
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.setEditing(editing, animated: animated)
+    }
+    
     @objc
     func tap(add button: UIBarButtonItem) {
         presentAddNew()
     }
     
     @objc
-    func tap(edit button: UIBarButtonItem) {
-        
-    }
-    
-    @objc
-    func tap(delete button: UIBarButtonItem) {
-        
-    }
-    
-    @objc
     func tap(sort button: UIBarButtonItem) {
         
     }
+    
+    private func handle(manualSort action: UIAction) {
+        if !tableView.isEditing {
+            tableView.setEditing(true, animated: true)
+        } else {
+            tableView.setEditing(false, animated: true)
+        }
+    }
+    
+    private func handle(ascending action: UIAction) {
+        dataController.sortByAscend()
+        updateView()
+        
+    }
+    
+    private func handle(descending action: UIAction) {
+        dataController.sortByDescend()
+        updateView()
+    }
+    
 
     // MARK: - Action
     private func updateView() {
@@ -98,6 +118,7 @@ class MainViewController: UIViewController {
         let vc = AddItemViewController.instantiate()
         present(vc, animated: true)
     }
+    
 }
 
 // MARK: - Table View
@@ -131,16 +152,44 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             tableView.beginUpdates()
-//            dataController.memos.remove(at: indexPath.row)
             dataController.remove(index: indexPath.row)
-
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.endUpdates()
         } else if editingStyle == .insert {
-            
+        
         }
     }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
 
-                
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let memo = dataController.memos[sourceIndexPath.row]
+        dataController.remove(index: sourceIndexPath.row)
+        dataController.insert(item: memo, at: destinationIndexPath.row)
+
+    }
+
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let memo = dataController.memos[indexPath.row]
+        let actionProvider: UIContextMenuActionProvider = { _ in
+
+            let renameMenu = UIAction(title: "Rename") { _ in
+                let navigation = EditItmeViewController.instantiate(with: memo)
+                self.present(navigation, animated: true)
+            }
+            let deleteMenu = UIAction(title: "Delete", attributes: .destructive) { _ in
+                self.dataController.remove(index: indexPath.row)
+            }
+
+            return UIMenu(title: memo.title, children: [
+                    renameMenu,
+                    deleteMenu
+                ])
+            }
+
+            return UIContextMenuConfiguration(identifier: "unique-ID" as NSCopying, previewProvider: nil, actionProvider: actionProvider)
+    }
+
 }
-

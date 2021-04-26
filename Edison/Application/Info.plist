@@ -2,8 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSDocumentsFolderUsageDescription</key>
+	<string>파일들 좀 이용할게</string>
 	<key>NSCameraUsageDescription</key>
-	<string>asdsadsaadsa</string>
+	<string>카메라 사용해도 되겠습니까</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>ehlllelelellel</string>
 	<key>CFBundleDevelopmentRegion</key>
