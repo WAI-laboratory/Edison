@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import RealmSwift
 
 final class DataController {
     static let shared = DataController()
     
     private var preference: UserDefaults { UserDefaults.standard }
+    private let realm = try! Realm()
     
     static let dataKey = "cellArray"
     
@@ -83,6 +85,7 @@ final class DataController {
                   userInfo: nil)
 
         preference.set(encodedData, forKey: Self.dataKey)
+
     }
     
     // MARK: - Save Image

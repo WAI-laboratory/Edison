@@ -10,6 +10,8 @@
 		150D68A7262AEE880021EBA0 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150D68A6262AEE880021EBA0 /* UIColorExtension.swift */; };
 		150D68AA262AEFE90021EBA0 /* NotificationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150D68A9262AEFE90021EBA0 /* NotificationExtension.swift */; };
 		150D68AD262F081A0021EBA0 /* MemoBaseEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150D68AC262F081A0021EBA0 /* MemoBaseEditViewController.swift */; };
+		150D68FF263841D90021EBA0 /* RealmDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150D68FE263841D90021EBA0 /* RealmDB.swift */; };
+		150D6905263843200021EBA0 /* RealmMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150D6904263843200021EBA0 /* RealmMemo.swift */; };
 		15C7064A260E233B000939E4 /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C70649260E233B000939E4 /* Memo.swift */; };
 		15C7065B260E34C1000939E4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C7065A260E34C1000939E4 /* BaseViewController.swift */; };
 		15C80B2625FC46400019CCAF /* SampleStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15C80B2525FC46400019CCAF /* SampleStoryboard.storyboard */; };
@@ -33,6 +35,8 @@
 		150D68A6262AEE880021EBA0 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		150D68A9262AEFE90021EBA0 /* NotificationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExtension.swift; sourceTree = "<group>"; };
 		150D68AC262F081A0021EBA0 /* MemoBaseEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoBaseEditViewController.swift; sourceTree = "<group>"; };
+		150D68FE263841D90021EBA0 /* RealmDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDB.swift; sourceTree = "<group>"; };
+		150D6904263843200021EBA0 /* RealmMemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmMemo.swift; sourceTree = "<group>"; };
 		15C70649260E233B000939E4 /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
 		15C7065A260E34C1000939E4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		15C80B2525FC46400019CCAF /* SampleStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SampleStoryboard.storyboard; sourceTree = "<group>"; };
@@ -117,11 +121,27 @@
 			path = MainVC;
 			sourceTree = "<group>";
 		};
+		150D68FD263841280021EBA0 /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				150D68FE263841D90021EBA0 /* RealmDB.swift */,
+			);
+			path = DB;
+			sourceTree = "<group>";
+		};
+		150D6902263842EB0021EBA0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				15C70649260E233B000939E4 /* Memo.swift */,
+				150D6904263843200021EBA0 /* RealmMemo.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		156AD9BC26058A9300DE7514 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				15C80B3825FC622E0019CCAF /* DataController.swift */,
-				15C70649260E233B000939E4 /* Memo.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -156,6 +176,8 @@
 		C930588B25F3D79100D8E6A1 /* Edison */ = {
 			isa = PBXGroup;
 			children = (
+				150D6902263842EB0021EBA0 /* Model */,
+				150D68FD263841280021EBA0 /* DB */,
 				15C70648260E2315000939E4 /* Scrum */,
 				150A1F962605866B00A30A37 /* Application */,
 				156AD9BC26058A9300DE7514 /* Controller */,
@@ -318,6 +340,7 @@
 			files = (
 				C930588D25F3D79100D8E6A1 /* AppDelegate.swift in Sources */,
 				C9C6C5DC262131EC00A5B4CC /* EditItemViewController.swift in Sources */,
+				150D68FF263841D90021EBA0 /* RealmDB.swift in Sources */,
 				150D68AD262F081A0021EBA0 /* MemoBaseEditViewController.swift in Sources */,
 				150D68A7262AEE880021EBA0 /* UIColorExtension.swift in Sources */,
 				C9C6C51A2608C02B00A5B4CC /* ToDo.swift in Sources */,
@@ -328,6 +351,7 @@
 				C9C6C5152608BBC600A5B4CC /* UICollectionViewExtension.swift in Sources */,
 				15C7064A260E233B000939E4 /* Memo.swift in Sources */,
 				150D68AA262AEFE90021EBA0 /* NotificationExtension.swift in Sources */,
+				150D6905263843200021EBA0 /* RealmMemo.swift in Sources */,
 				15C80B3125FC529C0019CCAF /* StudyLater.swift in Sources */,
 				C98CB30D25F50F7100821B8F /* UIviewExtension.swift in Sources */,
 				C98CB30725F50BC300821B8F /* MainViewController.swift in Sources */,

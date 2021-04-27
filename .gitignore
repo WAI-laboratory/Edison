@@ -1,6 +1,13 @@
+# Created by https://www.toptal.com/developers/gitignore/api/swift,cocoapods,xcode
+# Edit at https://www.toptal.com/developers/gitignore?templates=swift,cocoapods,xcode
 
-# Created by https://www.toptal.com/developers/gitignore/api/swift,xcode
-# Edit at https://www.toptal.com/developers/gitignore?templates=swift,xcode
+### CocoaPods ###
+## CocoaPods GitIgnore Template
+
+# CocoaPods - Only use to conserve bandwidth / Save time on Pushing
+#           - Also handy if you have a large number of dependant pods
+#           - AS PER https://guides.cocoapods.org/using/using-cocoapods.html NEVER IGNORE THE LOCK FILE
+Pods/
 
 ### Swift ###
 # Xcode
@@ -65,9 +72,9 @@ playground.xcworkspace
 
 Carthage/Build/
 
-# Accio dependency management
-Dependencies/
-.accio/
+# Add this lines if you are using Accio dependency management (Deprecated since Xcode 12)
+# Dependencies/
+# .accio/
 
 # fastlane
 # It is recommended to not store the screenshots in the git repo.
@@ -103,4 +110,4 @@ iOSInjectionProject/
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
 
-# End of https://www.toptal.com/developers/gitignore/api/swift,xcode
+# End of https://www.toptal.com/developers/gitignore/api/swift,cocoapods,xcode

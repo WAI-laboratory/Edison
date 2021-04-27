@@ -6,6 +6,7 @@
 //
 import UIKit
 import Foundation
+import RealmSwift
 
 class Memo: Codable {
     let id = UUID().uuidString
@@ -47,3 +48,5 @@ extension Memo: CustomDebugStringConvertible {
         return "ID \(id) | \(title) \(description) | \(imageID)"
     }
 }
+
+

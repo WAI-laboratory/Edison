@@ -6,6 +6,7 @@ target 'Edison' do
   use_frameworks!
 
 pod 'SnapKit'
+pod 'RealmSwift'
   # Pods for Edison
 
 end
