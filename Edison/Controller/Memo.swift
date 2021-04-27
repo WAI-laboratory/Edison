@@ -12,20 +12,38 @@ class Memo: Codable {
     var title: String
     var description = ""
     
-    // TODO: Save to disk
-    var image: UIImage?
-//    var imageURL: URL?
-//    var image: UIImage? {
-//
-//    }
+    private(set) var imageID = ""
+    
+    var image: UIImage? {
+        get { DataController.shared.loadImage(for: imageID) }
+        set { DataController.shared.assign(image: newValue, to: self) }
+    }
 
     // MARK: - Key
     private enum CodingKeys: String, CodingKey {
-        case id, title, description
+        case id, title, description, imageID
     }
     
     // MARK: - Initializaation
     init(title: String) {
         self.title = title
+    }
+    
+    // MARK: - Action
+    func setImageID(_ id: String) {
+        imageID = id
+    }
+}
+
+extension Memo: Equatable {
+    static func == (lhs: Memo, rhs: Memo) -> Bool {
+        // left hand side / right hand side
+        return lhs.id == rhs.id
+    }
+}
+
+extension Memo: CustomDebugStringConvertible {
+    var debugDescription: String {
+        return "ID \(id) | \(title) \(description) | \(imageID)"
     }
 }

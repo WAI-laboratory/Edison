@@ -11,6 +11,8 @@ import SnapKit
 class ItemDetailViewController: UIViewController {
     var memo: Memo?
     
+    private let dataController = DataController.shared
+    
     // MARK: - View
     private let scrollView = UIScrollView()
     private let stackView = UIStackView()
@@ -21,23 +23,30 @@ class ItemDetailViewController: UIViewController {
     // MARK: - View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        initView()
+        setupView()
+        updateView()
     }
     
-    private func initView() {
-        title = memo?.title
+    override func viewWillAppear(_ animated: Bool) {
+        setupNotification()
+    }
+    
+    private func setupView() {
         view.backgroundColor = .clubhouseBackground
         
         scrollView.alwaysBounceVertical = true
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.top.bottom.equalToSuperview()
+            make.leading.equalTo(self.view.safeAreaLayoutGuide.snp.leading)
+            make.trailing.equalTo(self.view.safeAreaLayoutGuide.snp.trailing)
         }
         
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .fill
         stackView.spacing = 8
+        
         scrollView.addSubview(stackView)
         stackView.snp.makeConstraints { (make) in
             make.top.bottom.equalToSuperview()
@@ -49,14 +58,41 @@ class ItemDetailViewController: UIViewController {
         stackView.addArrangedSubview(descriptionLabel)
         stackView.addArrangedSubview(imageView)
         
-        titleLabel.text = memo?.title
-        descriptionLabel.text = memo?.description
-        imageView.image = memo?.image
-        
         imageView.contentMode = .scaleAspectFit
         imageView.snp.makeConstraints { (make) in
             make.width.equalToSuperview()
             make.height.equalTo(320)
         }
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editDetails(edit:)))]
+    }
+
+    private func setupNotification() {
+        NotificationCenter.default
+            .addObserver(self,
+                         selector: #selector(handle(reload:)),
+                         name: .reloadNotificaiton,
+                         object: dataController)
+    }
+    
+    // MARK: - Action
+    private func updateView() {
+        title = memo?.title
+        titleLabel.text = memo?.title
+        descriptionLabel.text = memo?.description
+        if memo?.imageID != "" {
+            imageView.image = dataController.loadImage(for: memo!.imageID)
+        }
+    }
+    
+    @objc
+    private func handle(reload notification: Notification) {
+        updateView()
+    }
+    
+    @objc
+    func editDetails(edit button: UIBarButtonItem) {
+        guard let memo = memo else { return }
+        let navigation = EditItmeViewController.instantiate(with: memo)
+        present(navigation, animated: true)
     }
 }
